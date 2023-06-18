@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.tech.baptista.bookstore.screens.detail.DetailViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="true"
+                android:paddingBottom="@dimen/spacing_normal"
+                tools:context=".screens.detail.DetailFragment">
+
+                <ImageView
+                    android:id="@+id/book_photo_image"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:scaleType="centerCrop"
+                    app:imageUrl="@{viewModel.selectedBook.imageLink}"
+                    app:layout_constraintDimensionRatio="4:3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@tools:sample/backgrounds/scenic" />
+
+                <TextView
+                    android:id="@+id/book_title_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/lobster_two"
+                    android:text="@{viewModel.selectedBook.title}"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                    app:layout_constraintEnd_toStartOf="@id/end_grid"
+                    app:layout_constraintStart_toEndOf="@id/start_grid"
+                    app:layout_constraintTop_toBottomOf="@+id/book_photo_image"
+                    tools:text="My Favorite Book Name" />
+
+                <TextView
+                    android:id="@+id/book_authors_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="13dp"
+                    android:fontFamily="@font/lobster_two"
+                    android:text="@{viewModel.selectedBook.authors}"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                    app:layout_constraintEnd_toStartOf="@id/end_grid"
+                    app:layout_constraintStart_toEndOf="@id/start_grid"
+                    app:layout_constraintTop_toBottomOf="@+id/book_title_text"
+                    tools:text="My Favorite Authors Names" />
+
+                <TextView
+                    android:id="@+id/book_description_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@{viewModel.selectedBook.description}"
+                    app:layout_constraintEnd_toStartOf="@+id/end_grid"
+                    app:layout_constraintStart_toStartOf="@+id/start_grid"
+                    app:layout_constraintTop_toBottomOf="@id/book_authors_text"
+                    tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam nec enim condimentum, elementum massa quis, varius libero. Duis quis scelerisque ligula, sed pulvinar arcu. Vestibulum id lectus ornare erat iaculis lacinia. Aliquam pretium augue felis, et condimentum nisl cursus a. Nam pretium orci quis ligula semper, vel posuere orci semper. Mauris nunc ex, pellentesque et sapien sed, aliquam egestas orci." />
+
+                <Button
+                    android:id="@+id/buy_button"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Where to buy it "
+                    android:textAllCaps="false"
+                    android:textSize="18dp"
+                    app:layout_constraintEnd_toStartOf="@+id/end_grid"
+                    app:layout_constraintStart_toStartOf="@+id/start_grid"
+                    app:layout_constraintTop_toBottomOf="@id/book_description_text" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/start_grid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="@dimen/spacing_normal" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/end_grid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="@dimen/spacing_normal" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="@dimen/spacing_normal"
+            android:backgroundTint="@color/primaryLightColor"
+            android:onClick="@{() -> viewModel.updateFavoriteOnBook()}"
+            app:favoriteStatus="@{viewModel.selectedBook.favorite}" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>
